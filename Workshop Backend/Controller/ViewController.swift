@@ -43,16 +43,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let validDictionary = [
-            "numericalValue": 1,
-            "stringValue": "JSON",
-            "arrayValue": [0, 1, 2, 3, 4, 5]
-        ] as [String : Any]
-         
-        let invalidDictionary = [
-            "date": NSDate()
-        ]
-         
+        
         if JSONSerialization.isValidJSONObject(validDictionary) { // True
             do {
                 _ = try JSONSerialization.data(withJSONObject: validDictionary, options: .prettyPrinted)
@@ -66,28 +57,28 @@ class ViewController: UIViewController {
         }
         let jsonUrlString = "https://api.letsbuildthatapp.com/jsondecodable/courses_missing_fields"
         guard let url = URL(string: jsonUrlString) else { return }
-        
+
         URLSession.shared.dataTask(with: url) { (data, response, err) in
             //perhaps check err
             //also perhaps check response status 200 OK
             
             guard let data = data else { return }
             
-//            let dataAsString = String(data: data, encoding: .utf8)
-//            print(dataAsString)
+        //            let dataAsString = String(data: data, encoding: .utf8)
+        //            print(dataAsString)
             
             do {
-//                let websiteDescription = try JSONDecoder().decode(WebsiteDescription.self, from: data)
-//                print(websiteDescription.name, websiteDescription.description)
+        //                let websiteDescription = try JSONDecoder().decode(WebsiteDescription.self, from: data)
+        //                print(websiteDescription.name, websiteDescription.description)
                 
                 let courses = try JSONDecoder().decode([Course].self, from: data)
                 print(courses)
                 
                 //Swift 2/3/ObjC
-//                guard let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else { return }
-//
-//                let course = Course(json: json)
-//                print(course.name)
+        //                guard let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else { return }
+        //
+        //                let course = Course(json: json)
+        //                print(course.name)
                 
             } catch let jsonErr {
                 print("Error serializing json:", jsonErr)
@@ -96,9 +87,9 @@ class ViewController: UIViewController {
                         
             
         }.resume()
-        
-//        let myCourse = Course(id: 1, name: "my course", link: "some link", imageUrl: "some image url")
-//        print(myCourse)
+
+        //        let myCourse = Course(id: 1, name: "my course", link: "some link", imageUrl: "some image url")
+        //        print(myCourse)
     }
     
    
